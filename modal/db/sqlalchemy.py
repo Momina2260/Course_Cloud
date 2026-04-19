@@ -30,7 +30,7 @@ class Sqlalchemy(DBInterface):
         session=sessionmaker(bind=engine)
         session=session()
         user= session.query(User).filter(User.email == email).first()
-        session.commit()
         return user
+        session.commit()
         session.close()
   

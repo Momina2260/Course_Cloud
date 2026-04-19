@@ -28,4 +28,13 @@ def register():
 
 @routes.route("/login",methods=["Get","Post"])
 def login():
-    pass
+    message = ""
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        message = Services().getUser(email,password)
+    return render_template('login.html',message=message)
+ 
+@routes.route("/welcome")
+def welcome():
+    return render_template("welcome.html")
