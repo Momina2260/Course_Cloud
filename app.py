@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from db_modal.database import Base, engine
 from controller.routes import routes  
-from flask.cli import load_dotenv
+from flask.cli import load_dotenv, load_dotenv
 from db_modal.user_db_modal import User
 import os
 load_dotenv() 
