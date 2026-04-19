@@ -1,0 +1,91 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    align-items: center;
+}
+
+.main {
+    width: 400px;
+    margin: 50px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+
+
+.submit input {
+    width: 100%;
+    padding: 12px;
+    background-color: #6a8ca4;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.submit input:hover {
+    background-color: #1081a7;
+}
+
+
+
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <form action="{{url_for('routes.login')}}" class="main"  method="post">
+        <p>{{message}}</p>
+        
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" placeholder="example@gmail.com">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password"  placeholder="Example@123">
+        </div>
+       
+            <div class="submit">
+              <input type="submit" value="submit">
+            </div>
+                
+           
+
+    </form>
+</body>
+</html>

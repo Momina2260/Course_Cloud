@@ -1,0 +1,137 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    
+   body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    align-items: center;
+}
+
+.main {
+    width: 400px;
+    margin: 50px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+
+
+.submit input {
+    width: 100%;
+    padding: 12px;
+    background-color: #6a8ca4;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.submit input:hover {
+    background-color: #1081a7;
+}
+
+
+
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+}
+
+.radio-group label {
+    font-weight: normal;
+}
+
+
+    </style>
+</head>
+<body>
+   
+   <div class="main">
+    <form action="{{url_for('routes.register')}}" method="post">
+
+        <div class="form-group">
+            <p style="color: red;"> {{message}}</p>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name here..." required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="example@example.com" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Example@123" required>
+        </div>
+
+        <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+        </div>
+
+        <div class="form-group">
+            <label>Gender</label>
+            <div class="radio-group">
+                <label><input type="radio" name="gender" value="male"> Male</label>
+                <label><input type="radio" name="gender" value="female"> Female</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Role</label>
+            <div class="radio-group">
+                <label><input type="radio" name="role" value="teacher"> Teacher</label>
+                <label><input type="radio" name="role" value="student"> Student</label>
+            </div>
+        </div>
+
+        <div class="submit"  url>
+            <input type="submit" value="Register">
+        </div>
+        <div>
+
+            <p>
+        Already have an account? 
+        <a href="{{ url_for('routes.login') }}">Login</a>
+        </p>
+        </div>
+
+    </form>
+</div>
+   </div>
+</body>
+</html>
