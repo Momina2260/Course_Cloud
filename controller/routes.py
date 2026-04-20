@@ -4,12 +4,12 @@ from modal.services import Services
 
 routes = Blueprint('routes', __name__)
 
-@routes.route('/abc')
+@routes.route('/')
 def index():
     return render_template('index.html')
 
 
-@routes.route("/", methods=["Get","Post"])
+@routes.route("/register", methods=["Get","Post"])
 def register():
     message = ""
     if request.method == "POST":
@@ -35,6 +35,7 @@ def login():
         message = Services().getUser(email,password)
     return render_template('login.html',message=message)
  
-@routes.route("/welcome")
-def welcome():
-    return render_template("welcome.html")
+@routes.route("/td")
+def teacher_dashboard():
+    courses=Services().getCourse()
+    return render_template("teacher_dashboard.html")

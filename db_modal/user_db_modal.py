@@ -8,5 +8,12 @@ class User(Base):
     email = Column(String(50), unique=True)
     password = Column(Text)
     gender  =  Column(String(50))
-    role = Column(String(50))
+    role = Column(String(50))  
+    #_____________________
+class Course(Base):
+    __tablename__="courses"
+    id = Column(Integer,primary_key=True)
+    title = Column(String(50))
+    author = Column(String(50))
+    description = Column(String(100))
     

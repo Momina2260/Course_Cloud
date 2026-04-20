@@ -56,3 +56,6 @@ class Services:
             return "Wrong password"
         
         return "login successfull"
+      #______________________________________________________
+    def getCourse(self):
+        course=self.__repo.get_course()

@@ -5,6 +5,9 @@ class DBInterface(ABC):
     def registerNewUser(self, name, email, password , gender ,role):
         pass
 
-   
-    def get_user(email):
+    @abstractmethod
+    def get_user(self,email):
+        pass
+    @abstractmethod
+    def get_course(self):
         pass
