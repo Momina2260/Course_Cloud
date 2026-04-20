@@ -38,21 +38,28 @@ class Sqlalchemy(DBInterface):
         
     def add_course(self,title,author,description):
         session = sessionmaker(bind=engine) 
-        self.session=session()
+        session=session()
         newCourse = Course(title=title,author=author,description=description)
         try:
             session.add(newCourse)
             session.commit()
             return newCourse
+            print(f"{newCourse} :courseID")
         
         except Exception as e:
             session.rollback()
             print("Error:", e)
             
         finally:
+            
             session.close()
         
     
-    def get_course(self):
-        pass
+    def fetch_courses(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        courses = session.query(Course).all()
+        return courses
+        session.commit()
+        session.close()
   
