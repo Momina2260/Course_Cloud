@@ -1,11 +1,65 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+       body {
+        font-family: Arial, sans-serif;
+        margin: 0px;
+        display: grid;
+         place-items: center;   /* centers container */
+        min-height: 100vh;
+        }
+        .courses_container{
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(250,1fr));
+            gap: 15px;
+            width: 60%;
+            max-width: 900px;
+            padding: 20px;
+            margin: 50px auto;
+            border:1PX solid  grey;
+            border-radius:10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            padding:6px;
+        }
+        .course{
+            font-family: Arial, sans-serif;
+            background-color:  whitesmoke;
+            border:1px solid grey;
+            border-radius:6px;
+            margin-bottom:10px;
+            padding:40px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            
+        }
+        .button{
+            padding:10px;
+            margin-bottom:5px;
+        }
+    </style>
 </head>
+
 <body>
-    <p>welcome teacher</p>
-    
+   
+    <div class="courses_container">
+         <div class="button"><a href="{{url_for('routes.addCourse')}}">
+            <button>addCourse</button>
+        </a>
+    </div>
+        {% for course in courses %}
+       <div>
+         <li class="course">
+            <a href="course_detail.html"><strong>{{ course.title }}</strong><br></a>
+            {{ course.author }}<br>
+            {{ course.description }}
+        </li>
+       </div>
+        {% endfor %}
+    </div>
+
 </body>
+
 </html>
