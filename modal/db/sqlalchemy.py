@@ -1,8 +1,8 @@
 from abc import abstractmethod
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session, sessionmaker
 
 from db_modal.database import engine,Base
-from db_modal.user_db_modal import User
+from db_modal.user_db_modal import User,Course
 #import DBInterface from modal.db.db_interface
 from modal.db_interface import DBInterface
 from sqlalchemy.orm import sessionmaker
@@ -33,4 +33,26 @@ class Sqlalchemy(DBInterface):
         return user
         session.commit()
         session.close()
+        
+        
+        
+    def add_course(self,title,author,description):
+        session = sessionmaker(bind=engine) 
+        self.session=session()
+        newCourse = Course(title=title,author=author,description=description)
+        try:
+            session.add(newCourse)
+            session.commit()
+            return newCourse
+        
+        except Exception as e:
+            session.rollback()
+            print("Error:", e)
+            
+        finally:
+            session.close()
+        
+    
+    def get_course(self):
+        pass
   
