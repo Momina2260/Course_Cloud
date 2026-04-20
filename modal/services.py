@@ -57,5 +57,22 @@ class Services:
         
         return "login successfull"
       #______________________________________________________
-    def getCourse(self):
-        course=self.__repo.get_course()
+   
+        
+        
+    def add_New_course(self,title,author,description):
+        
+        if not title or not author or not description:
+            return "fill all the field!"
+        
+        courseId=self.__repo.new_course(title,author,description)
+        
+        if courseId != None:
+            return f"{title}:{author}:{description} added successfully"
+        else:
+            return "no course added!"
+            
+        
+    def get_all_Courses(self):
+        courses=self.__repo.get_courses()
+        return courses

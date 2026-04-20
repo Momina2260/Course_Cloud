@@ -15,5 +15,5 @@ class Course(Base):
     id = Column(Integer,primary_key=True)
     title = Column(String(50))
     author = Column(String(50))
-    description = Column(String(100))
+    description = Column(Text)
     

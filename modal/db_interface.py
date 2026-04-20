@@ -8,6 +8,11 @@ class DBInterface(ABC):
     @abstractmethod
     def get_user(self,email):
         pass
+    
     @abstractmethod
-    def get_course(self):
+    def add_course(self):
+        pass
+    
+    @abstractmethod
+    def fetch_courses(self):
         pass
