@@ -35,7 +35,25 @@ def login():
         message = Services().getUser(email,password)
     return render_template('login.html',message=message)
  
+
+
+@routes.route("/add_new_course",methods =["Get","Post"])
+def addCourse():
+    message=""
+    if request.method == "POST":
+        print("post request recieved")
+        title = request.form.get("title")
+        print("title got")
+        author = request.form.get("author")
+        print("author got")
+        description = request.form.get("description")
+        print("description got")
+        message=Services().add_New_course(title,author,description)
+    return render_template("add_new_course.html", message=message)
+    
+    #------------------------------------------------
+    
 @routes.route("/td")
 def teacher_dashboard():
-    courses=Services().getCourse()
-    return render_template("teacher_dashboard.html")
+    courses=Services().get_all_Courses()
+    return render_template("teacher_dashboard.html",courses=courses)
