@@ -13,3 +13,7 @@ class Repository:
         
     def get_courses(self):
         return self.__db.fetch_courses()
+   
+   
+    def searchCourses(self,search):
+       return self.__db.search_courses(search)

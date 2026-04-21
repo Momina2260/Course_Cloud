@@ -62,4 +62,11 @@ class Sqlalchemy(DBInterface):
         return courses
         session.commit()
         session.close()
-  
+        
+    def search_courses(self,search):
+        Session = sessionmaker(bind = engine)
+        session = Session()
+        searched_course = session.query(Course).filter(Course.title.ilike(f"%{search}%")).all()
+        return searched_course
+        session.commit()
+        session.close()

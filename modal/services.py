@@ -76,3 +76,8 @@ class Services:
     def get_all_Courses(self):
         courses=self.__repo.get_courses()
         return courses
+    
+    def  searchcourse(self,search):
+            s_course=self.__repo.searchCourses(search)
+            return s_course
+                    

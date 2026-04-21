@@ -55,5 +55,12 @@ def addCourse():
     
 @routes.route("/td")
 def teacher_dashboard():
-    courses=Services().get_all_Courses()
+    courses=""
+    search = request.args.get("search", "").strip()
+    if search:
+        courses=Services().searchcourse(search)
+        print("search done")
+    else:
+        courses=Services().get_all_Courses()
+        print("no search")
     return render_template("teacher_dashboard.html",courses=courses)

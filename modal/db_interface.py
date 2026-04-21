@@ -16,3 +16,7 @@ class DBInterface(ABC):
     @abstractmethod
     def fetch_courses(self):
         pass
+    
+    @abstractmethod
+    def search_courses(self,search):
+        pass

@@ -13,12 +13,11 @@
         min-height: 100vh;
         }
         .courses_container{
-            display:grid;
-            grid-template-columns:repeat(auto-fill,minmax(250,1fr));
+         
+            display: flex;
+            flex-direction: column;
             gap: 15px;
-            width: 60%;
-            max-width: 900px;
-            padding: 20px;
+            width: 65%;
             margin: 50px auto;
             border:1PX solid  grey;
             border-radius:10px;
@@ -30,34 +29,81 @@
             background-color:  whitesmoke;
             border:1px solid grey;
             border-radius:6px;
-            margin-bottom:10px;
-            padding:40px;
+            list-style: none;
+            margin: 0;
+            padding: 20px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
             
         }
-        .button{
-            padding:10px;
-            margin-bottom:5px;
-        }
+       
+      
+        .search-form input
+       {
+        background-color:  whitesmoke;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 8px 15px;
+        width: 100%;
+        margin-top:5px;
+       }
+        .search-form input:focus
+     {
+        outline: none;
+        border-color: #a2aab8;
+        box-shadow: 0 0 5px rgba(155, 157, 155, 0.4);
+      }
+      .top{
+         
+         width: 100%;
+         display:flex;
+         justify-content:space-between;
+         align-items: center;
+    
+         }
+         .top button{
+            background-color:  whitesmoke;
+            border: 1px solid #ccc;
+            border-radius:6px;
+            padding: 6px;
+         }
+
     </style>
 </head>
 
 <body>
+    
    
     <div class="courses_container">
-         <div class="button"><a href="{{url_for('routes.addCourse')}}">
-            <button>addCourse</button>
-        </a>
-    </div>
-        {% for course in courses %}
-       <div>
-         <li class="course">
-            <a href="course_detail.html"><strong>{{ course.title }}</strong><br></a>
-            {{ course.author }}<br>
-            {{ course.description }}
-        </li>
-       </div>
-        {% endfor %}
+         <div class="top">
+                            <div>
+                                <a href="{{url_for('routes.addCourse')}}">
+                                    <button>addCourse</button>
+                                </a>
+                            </div>
+                            <div>
+                              <form action="{{url_for('routes.teacher_dashboard')}}" method="get" class="search-form">
+                                    <input type="text" name="search" 
+                                        value="{{ request.args.get('search', '') }}"
+                                        placeholder="🔍 Search for course...">
+                            </form>
+                            </div>
+
+        </div>
+                  
+                 {% for course in courses %}
+           <div>
+                    {% if request.args.get('search') %}
+                     <p>Showing results for: <strong>"{{ request.args.get('search') }}"</strong></p>
+                        {% endif %}
+                        
+                    <li class="course">
+                        <a href="course_detail.html"><strong>{{ course.title }}</strong><br></a>
+                        {{ course.author }}<br>
+                        {{ course.description }}
+                    </li>
+            </div>
+                {% endfor %}
+
     </div>
 
 </body>
