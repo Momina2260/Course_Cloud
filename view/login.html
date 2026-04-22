@@ -63,13 +63,16 @@ label {
     font-weight: bold;
 }
 
-
+p{
+    color: red;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
     </style>
 </head>
 <body>
     <form action="{{url_for('routes.login')}}" class="main"  method="post">
-        <p>{{message}}</p>
+        <p>{{result}}</p>
         
         <div class="form-group">
             <label for="email">Email:</label>

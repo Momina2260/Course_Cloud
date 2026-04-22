@@ -28,28 +28,31 @@ def register():
 
 @routes.route("/login",methods=["Get","Post"])
 def login():
-    message = ""
+    result = ""
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
-        message = Services().getUser(email,password)
-    return render_template('login.html',message=message)
+        
+        user,error = Services().getUser(email,password)
+        if error:
+            return render_template("login.html",result = error)
+            
+        if user and user.role == 'teacher':
+            return redirect(url_for('routes.teacher_dashboard',result = user))
+    return render_template('login.html',result=result)
  
 
 
 @routes.route("/add_new_course",methods =["Get","Post"])
 def addCourse():
-    message=""
+    result=""
     if request.method == "POST":
-        print("post request recieved")
         title = request.form.get("title")
-        print("title got")
         author = request.form.get("author")
-        print("author got")
         description = request.form.get("description")
-        print("description got")
-        message=Services().add_New_course(title,author,description)
-    return render_template("add_new_course.html", message=message)
+        result=Services().add_New_course(title,author,description)
+        
+    return render_template("add_new_course.html", result=result)
     
     #------------------------------------------------
     

@@ -46,16 +46,17 @@ class Services:
         
     def getUser(self,email,password):
         if not email or not password:
-            return "provide full cradentials!"
+            return None, "provide full cradentials!"
+        
         user=self.__repo.get_user_by_email(email)  
         
         if user is None:
-            return "no user with such cradentials!"
+            return None,"no user with such cradentials!"
         
         if not check_password_hash(user.password, password):
-            return "Wrong password"
-        
-        return "login successfull"
+            return None, "Wrong password"
+
+        return user,"login successfull"
       #______________________________________________________
    
         
