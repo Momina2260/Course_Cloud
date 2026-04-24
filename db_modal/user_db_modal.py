@@ -1,4 +1,4 @@
-from sqlalchemy import Column,Integer,String,Text
+from sqlalchemy import Column, ForeignKey,Integer,String,Text
 from .database import Base,engine
 
 class User(Base):
@@ -16,4 +16,10 @@ class Course(Base):
     title = Column(String(50))
     author = Column(String(50))
     description = Column(Text)
-    
+class Lecture(Base):
+    __tablename__="lectures"
+    id = Column(Integer,primary_key=True)
+    title = Column(String(50))
+    description = Column(Text)
+    video_url = Column(String(255), nullable=False)
+    course_id = Column(Integer, ForeignKey('courses.id')) 

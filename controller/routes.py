@@ -55,6 +55,29 @@ def addCourse():
     return render_template("add_new_course.html", result=result)
     
     #------------------------------------------------
+@routes.route("/addlec",methods=["Get","Post"])   
+def addlec():
+    result=""
+    if request.method == "POST":
+            title = request.form.get("title")
+            description = request.form.get("description")
+            video_url=request.form.get("video_url")
+            result=Services().add_New_lecture(title,description,video_url)
+        
+    return render_template("add_lecture.html", result=result)
+    
+#--------------------------------------------
+@routes.route("/cd")
+def course_detail():
+    lectures=""
+    search = request.args.get("search", "").strip()
+    if search:
+        lectures=Services().searchlecture(search)
+        print("search done")
+    else:
+        lectures=Services().get_all_lectures()
+        print("no search")
+    return render_template("course_detail.html",lectures=lectures)
     
 @routes.route("/td")
 def teacher_dashboard():
