@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add_lecture</title>
+</head>
+<body>
+    <form action="{{url_for('routes.addlec')}}" , method="post">
+        <p>{{result}}</p>
+        <label for="title">title:</label>
+        <input type="text" name="title" placeholder="title...">
+        <label for="description">description:</label>
+        <input type="text" name="description" placeholder="description...">
+        <label for="video_url">video_url:</label>
+        <input type="text" name="video_url" placeholder="video_url...">
+        <input type="submit" value="add">
+    </form>
+</body>
+</html>

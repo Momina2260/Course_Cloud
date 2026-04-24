@@ -110,7 +110,7 @@
                         {% endif %}
                         
                     <li class="course">
-                        <a href="course_detail.html"><strong>{{ course.title }}</strong><br></a>
+                        <a href="{{ url_for('routes.course_detail') }}"><strong>{{ course.title }}</strong><br></a>
                         <strong>{{ course.author }}</strong><br>
                         {{ course.description }}
                     </li>

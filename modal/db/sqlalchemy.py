@@ -2,7 +2,7 @@ from abc import abstractmethod
 from sqlalchemy.orm import Session, sessionmaker
 
 from db_modal.database import engine,Base
-from db_modal.user_db_modal import User,Course
+from db_modal.user_db_modal import User,Course,Lecture
 #import DBInterface from modal.db.db_interface
 from modal.db_interface import DBInterface
 from sqlalchemy.orm import sessionmaker
@@ -68,5 +68,35 @@ class Sqlalchemy(DBInterface):
         session = Session()
         searched_course = session.query(Course).filter(Course.title.ilike(f"%{search}%")).all()
         return searched_course
+        session.commit()
+        session.close()
+        
+    def add_lecture(self, title, description,video_url):
+        Session=sessionmaker(bind = engine)
+        session=Session()
+        lecture = Lecture(title= title,description=description,video_url=video_url)
+        try:
+            session.add(lecture)
+            session.commit()
+            return lecture
+        except Exception as e:
+            session.rollback()
+            print("Error:", e)
+            
+        finally:
+            session.close()
+            
+    def fetch_lectures(self):
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        lectures = session.query(Lecture).all()
+        return lectures
+        session.commit()
+        session.close()
+    def  search_lec(self,search):
+        Session = sessionmaker(bind = engine)
+        session = Session()
+        searched_lecture = session.query(Lecture).filter(Lecture.title.ilike(f"%{search}%")).all()
+        return searched_lecture
         session.commit()
         session.close()

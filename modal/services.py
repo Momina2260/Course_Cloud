@@ -69,7 +69,7 @@ class Services:
         courseId=self.__repo.new_course(title,author,description)
         
         if courseId != None:
-            return f"{title}:{author}:{description} added successfully"
+            return f"{title}:{author}:{description}:added successfully"
         else:
             return "no course added!"
             
@@ -81,4 +81,24 @@ class Services:
     def  searchcourse(self,search):
             s_course=self.__repo.searchCourses(search)
             return s_course
-                    
+        
+     #---------------------------------------------       
+    def add_New_lecture(self,title,description,video_url):
+        if not title or not description or not video_url:
+            return "fill all the field"
+        lecId = self.__repo.new_lec(title,description,video_url)
+        
+        if lecId != None:
+            return "new lecture added successfully"
+        else:
+            return "no lecture added.something went wrong" 
+    #--------------------------------------------
+    def get_all_lectures(self):
+        lectures=self.__repo.get_lectures()
+        return lectures
+    
+    def  searchlecture(self,search):
+            s_lecture=self.__repo.searchLec(search)
+            return s_lecture
+        
+        
