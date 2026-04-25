@@ -36,10 +36,11 @@ class Sqlalchemy(DBInterface):
     def getUser_by_id(self,userId):
         db_session=self.Session()
         try:
-            user=db_session.query(User).filter(User.id==userId).all()
+            user=db_session.query(User).filter(User.id==userId).first()
             return user
         finally:
             db_session.close()
+            
     def add_course(self,title,author,description): 
         db_session=self.Session()
         newCourse = Course(title=title,author=author,description=description)

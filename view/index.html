@@ -60,6 +60,22 @@
     transition: 0.3s ease;
     overflow: hidden;
 }
+.avater{
+    width: 25px;
+    height:25px;
+    background-color: rgb(99, 136, 206);
+    color: white;
+    border: 1px grey;
+    border-radius:50%;
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    font-size: 14x;
+    font-weight:400;
+    text-transform: lowercase;
+
+}
+
     </style>
 </head>
 <body>
@@ -70,7 +86,7 @@
     <div  id="header" style="background-color: green;">
         <ul>
     {% if user %}
-        <li>{{ user.name.split()[0][0] }}</li>
+        <div class="avater"><li>{{ user.name.split()[0][0] }}</li></div>
         <li>about</li>
         <li>contact</li>
         <li><a href="/logout">logout</a></li>

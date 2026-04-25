@@ -44,23 +44,24 @@ class Services:
             return "registeration failed!"
         #__________________________________________________
         
-    def getUser(self,email,password):
+    def getUser(self, email, password):
         if not email or not password:
-            return None, "provide full cradentials!"
+            return None, "provide full credentials!"   
         
-        user=self.__repo.get_user_by_email(email)  
-        
+        user = self.__repo.get_user_by_email(email)
+
         if user is None:
-            return None,"no user with such cradentials!"
+            return None, "no user with such credentials!"
         
         if not check_password_hash(user.password, password):
             return None, "Wrong password"
 
-        return user,"login successfull"
+        return user, None   # ✅ success
     #__________________________________
     def check_already_loged_in_user(self,userId):
         user=self.__repo.getUserById(userId)
         return user
+    
     def add_New_course(self,title,author,description):
         
         if not title or not author or not description:

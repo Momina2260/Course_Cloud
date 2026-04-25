@@ -10,7 +10,7 @@ def home():
     userId=session.get("user_id")
     user = Services().check_already_loged_in_user(userId)
     print(f"useris{user}")
-    return render_template("index.html", user=user)
+    return render_template("index.html",user=user)
 
 @routes.route("/register", methods=["Get","Post"])
 def register():
@@ -31,31 +31,25 @@ def register():
 
 @routes.route("/login",methods=["Get","Post"])
 def login():
-    result = ""
+    user = ""
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
-        session['email'] = email 
-        user,error = Services().getUser(email,password)
+
+        user, error = Services().getUser(email, password)
+
         if error:
-            
-            return render_template("login.html",result = error)
+            return render_template("login.html", user=error)
+
         if user:
+            session['email'] = email
             session['user_id'] = user.id
             session['role'] = user.role
             print("logged in role:", user.role)
 
-            
-        if user.role == "teacher":
-            print(f"{user.role}")
-            return redirect(url_for('routes.home'))
+            return redirect(url_for('routes.home'))  
 
-        elif user.role == "student":
-            return redirect(url_for('routes.home'))
-        
-    return render_template('login.html',result=result)
- 
-
+    return render_template('login.html', user=user)
 
 @routes.route("/add_new_course",methods =["Get","Post"])
 def addCourse():
