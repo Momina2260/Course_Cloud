@@ -5,9 +5,12 @@ from modal.services import Services
 routes = Blueprint('routes', __name__)
 
 @routes.route('/')
-def index():
-    return render_template('index.html')
-
+def home():
+    print("home")
+    userId=session.get("user_id")
+    user = Services().check_already_loged_in_user(userId)
+    print(f"useris{user}")
+    return render_template("index.html", user=user)
 
 @routes.route("/register", methods=["Get","Post"])
 def register():
@@ -32,13 +35,24 @@ def login():
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
-        
+        session['email'] = email 
         user,error = Services().getUser(email,password)
         if error:
-            return render_template("login.html",result = error)
             
-        if user and user.role == 'teacher':
-            return redirect(url_for('routes.teacher_dashboard',result = user))
+            return render_template("login.html",result = error)
+        if user:
+            session['user_id'] = user.id
+            session['role'] = user.role
+            print("logged in role:", user.role)
+
+            
+        if user.role == "teacher":
+            print(f"{user.role}")
+            return redirect(url_for('routes.home'))
+
+        elif user.role == "student":
+            return redirect(url_for('routes.home'))
+        
     return render_template('login.html',result=result)
  
 

@@ -57,10 +57,10 @@ class Services:
             return None, "Wrong password"
 
         return user,"login successfull"
-      #______________________________________________________
-   
-        
-        
+    #__________________________________
+    def check_already_loged_in_user(self,userId):
+        user=self.__repo.getUserById(userId)
+        return user
     def add_New_course(self,title,author,description):
         
         if not title or not author or not description:

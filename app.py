@@ -1,15 +1,17 @@
 from flask import Flask, render_template, request
 from db_modal.database import Base, engine
 from controller.routes import routes  
-from flask.cli import load_dotenv
+from dotenv import load_dotenv
 from db_modal.user_db_modal import User
 import os
+
 load_dotenv() 
 
-
 app = Flask(__name__, template_folder='view')
+
+app.secret_key=os.getenv("SECRET_KEY")
 app.register_blueprint(routes)
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+
 Base.metadata.create_all(engine)
 
 

@@ -30,3 +30,6 @@ class DBInterface(ABC):
     @abstractmethod
     def search_lec(self,search):
         pass
+    @abstractmethod
+    def getUser_by_id(self,userId):
+       pass

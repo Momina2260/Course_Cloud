@@ -8,6 +8,9 @@ class Repository:
            return self.__db.registerNewUser(name,email,password,gender,role)
     def get_user_by_email(self,email):
             return self.__db.get_user(email)
+
+    def getUserById(self,userId):
+        return self.__db.getUser_by_id(userId)
         
     def new_course(self,title,author,description):
         return self.__db.add_course(title,author,description)

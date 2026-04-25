@@ -4,12 +4,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        p {
-            color: red;
-        }
+       .container{
+            height:100%;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            grid-template-rows: 50px 1fr auto;
+            grid-gap:10px 10px;
+            grid-template-areas: "sidebar header"
+                                  " sidebar content"
+                                  " sidebar content"
+                                   "sidebar footer";
+                        
+
+       }
+       #header{
+        grid-area:header;
+         border:1px solid grey;
+        border-radius:4px;
+       }
+      
+       #sidebar{
+        grid-area:sidebar;
+        border:1px solid grey;
+        border-radius:4px;
+       }
+        #content{
+
+        grid-area:content;
+       }
+       #footer{
+        grid-area:footer;
+        background-color: whitesmoke;
+         border:1px solid grey;
+        border-radius:4px;
+       }
+       #toggle{
+        display: none;
+       }
+       #toggle:checked ~.container{
+ grid-template-columns:0 1fr ;
+       }
+       #toggle:checked ~.container #sidebar{
+        display: none;
+       }
+       #header ul{
+        display: flex;
+        list-style:none;
+        justify-content: flex-end;
+        padding: 0px;
+       
+        gap: 20px;
+
+       }
+       #sidebar {
+    transition: 0.3s ease;
+    overflow: hidden;
+}
     </style>
 </head>
 <body>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem sint reprehenderit, reiciendis eaque ipsum, adipisci doloribus, veniam ea non amet distinctio impedit. Harum itaque totam minima. Facilis, eaque? Neque, nesciunt.</p>
+    
+    <input type="checkbox" id="toggle">
+    <label for="toggle">☰ </label>
+   <div class="container"> 
+    <div  id="header" style="background-color: green;">
+        <ul>
+    {% if user %}
+        <li>{{ user.name.split()[0][0] }}</li>
+        <li>about</li>
+        <li>contact</li>
+        <li><a href="/logout">logout</a></li>
+    {% else %}
+        <li><a href="{{ url_for('routes.login') }}">login</a></li>
+        <li>about</li>
+        <li>contact</li>
+    {% endif %}
+</ul>
+    </div>
+    <div  id="sidebar" style="background-color:blue;">sidebar</div>
+    <div  id="content"   style="background-color: red;">content</div>
+    <div  id="footer" style="background-color:whitesmoke;">footer</div></div>
 </body>
 </html>
