@@ -4,6 +4,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+          :root{
+    --primary-color: #6a8ca4;
+    --primary-hover: #1081a7;
+     --input-border: #ccc;
+     --input-focus-border: #a2aab8;
+     --secoundary-color: #f5f5f5;/*for  sidee bar */
+     --error-color: red;
+     --text-color: #333;
+     --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+     --box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+     --link-color: #1081a7;
+     --link-hover: #6a8ca4;
+    }
        .container{
             height:100%;
             display: grid;
@@ -25,7 +38,7 @@
       
        #sidebar{
         grid-area:sidebar;
-        border:1px solid grey;
+        border:var(--input-border) 1px solid;
         border-radius:4px;
        }
         #content{
@@ -34,8 +47,8 @@
        }
        #footer{
         grid-area:footer;
-        background-color: whitesmoke;
-         border:1px solid grey;
+        background-color:var(--secoundary-color);
+         border:var(--input-border) 1px solid;
         border-radius:4px;
        }
        #toggle{
@@ -57,15 +70,15 @@
 
        }
        #sidebar {
-    transition: 0.3s ease;
+    transition: 0.02s ease-in-out;
     overflow: hidden;
 }
 .avater{
     width: 25px;
     height:25px;
-    background-color: rgb(99, 136, 206);
+    background-color: var(--primary-color);
     color: white;
-    border: 1px grey;
+    border: 1px solid var(--input-border);
     border-radius:50%;
     display:flex;
     align-items: center;
