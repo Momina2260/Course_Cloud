@@ -83,11 +83,27 @@ class Services:
             s_course=self.__repo.searchCourses(search)
             return s_course
         
-     #---------------------------------------------       
+     #---------------------------------------------  
+    def extract_video_id(self, url):
+     try:
+        if "youtu.be" in url:
+            return url.split("/")[-1]
+
+        if "watch?v=" in url:
+            return url.split("v=")[-1].split("&")[0]
+
+        if "embed/" in url:
+            return url.split("embed/")[-1]
+
+        return None  # ❗ better than returning wrong data
+     except:
+        return None 
+    #---------------------------------------------  
     def add_New_lecture(self,title,description,video_url):
         if not title or not description or not video_url:
             return "fill all the field"
-        lecId = self.__repo.new_lec(title,description,video_url)
+        video_id = self.extract_video_id(video_url)
+        lecId = self.__repo.new_lec(title,description,video_id)
         
         if lecId != None:
             return "new lecture added successfully"
