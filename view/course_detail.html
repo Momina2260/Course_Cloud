@@ -93,6 +93,10 @@
             font-size: 25px;
             color: var(--text-color);
         }
+        div li a{
+            text-decoration: none;
+            color: var(--link-color);
+        }
 
     </style>
 </head>
@@ -125,9 +129,16 @@
                         {% endif %}
                         
                     <li class="lectures">
-                        <a href="lecture_detail.html"><strong>{{ lecture.title }}</strong><br></a>
-                        <strong>{{ lecture.description }}</strong><br>
-                        {{ lecture.vedio_url }}
+                       
+                        <iframe width="400" height="250"
+                        src="https://www.youtube.com/embed/{{ lecture.video_url }}"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                    </iframe><br>
+
+                     <a href="lecture_detail.html">
+                        <strong>{{ lecture.title }}</strong><br></a>
+                        {{ lecture.description }}<br>
                     </li>
             </div>
                 {% endfor %}

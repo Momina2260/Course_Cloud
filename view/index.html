@@ -1,117 +1,159 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-          :root{
-    --primary-color: #6a8ca4;
-    --primary-hover: #1081a7;
-     --input-border: #ccc;
-     --input-focus-border: #a2aab8;
-     --secoundary-color: #f5f5f5;/*for  sidee bar */
-     --error-color: red;
-     --text-color: #333;
-     --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-     --box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-     --link-color: #1081a7;
-     --link-hover: #6a8ca4;
-    }
-       .container{
-            height:100%;
+        :root {
+            --primary-color: #6a8ca4;
+            --primary-hover: #1081a7;
+            --input-border: #ccc;
+            --input-focus-border: #051c42;
+            --secoundary-color: #f5f5f5;
+            /*for  side bar */
+            --error-color: red;
+            --text-color: #333;
+            --font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            --box-shadow: inset 2px 0 12px rgba(0, 0, 0, 0.15);
+            --link-color: #1081a7;
+            --link-hover: #6a8ca4;
+        }
+
+        body {
+            margin: 0px;
+        }
+
+        .container {
+            height: 100vh;
             display: grid;
-            grid-template-columns: 250px 1fr;
+            grid-template-columns: 0 1fr;
             grid-template-rows: 50px 1fr auto;
-            grid-gap:10px 10px;
-            grid-template-areas: "sidebar header"
-                                  " sidebar content"
-                                  " sidebar content"
-                                   "sidebar footer";
-                        
+            grid-template-areas:
+                "sidebar header"
+                "sidebar content"
+                "sidebar content"
+                "sidebar footer";
+            transition: grid-template-columns 0.5s ease;
+        }
 
-       }
-       #header{
-        grid-area:header;
-         border:1px solid grey;
-        border-radius:4px;
-       }
-      
-       #sidebar{
-        grid-area:sidebar;
-        border:var(--input-border) 1px solid;
-        border-radius:4px;
-       }
-        #content{
+        #header {
+            background-color: #6f8fa6;
+            grid-area: header;
+            border: 1px solid var(--input-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
 
-        grid-area:content;
-       }
-       #footer{
-        grid-area:footer;
-        background-color:var(--secoundary-color);
-         border:var(--input-border) 1px solid;
-        border-radius:4px;
-       }
-       #toggle{
-        display: none;
-       }
-       #toggle:checked ~.container{
- grid-template-columns:0 1fr ;
-       }
-       #toggle:checked ~.container #sidebar{
-        display: none;
-       }
-       #header ul{
-        display: flex;
-        list-style:none;
-        justify-content: flex-end;
-        padding: 0px;
-       
-        gap: 20px;
+        #sidebar {
+            grid-area: sidebar;
+            background-color: var(--secoundary-color);
+            height: 100vh;
+            border-right: 1px solid var(--input-border);
+            box-shadow: var(--box-shadow);
+            border-left: 2px solid gray;
+            border-bottom: 2px solid gray;
+            overflow: hidden;
+        }
 
-       }
-       #sidebar {
-    transition: 0.02s ease-in-out;
-    overflow: hidden;
-}
-.avater{
-    width: 25px;
-    height:25px;
-    background-color: var(--primary-color);
-    color: white;
-    border: 1px solid var(--input-border);
-    border-radius:50%;
-    display:flex;
-    align-items: center;
-    justify-content:center;
-    font-size: 14x;
-    font-weight:400;
-    text-transform: lowercase;
+        #content {
+            background-color: var(--secoundary-color);
+            border: var(--input-border) 1px solid;
 
-}
+            grid-area: content;
+        }
 
+        #footer {
+            background-color: var(--secoundary-color);
+            border: var(--input-border) 1px solid;
+            grid-area: footer;
+            background-color: var(--secoundary-color);
+            border: var(--input-border) 1px solid;
+
+        }
+
+        #toggle {
+            display: none;
+        }
+
+        #header ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 20px;
+
+        }
+
+        .layout:has(#toggle:checked) .container {
+            grid-template-columns: 250px 1fr;
+            transition: 0.4s ease-out;
+            background-color: var(--secoundary-color);
+            grid-area: sidebar;
+            height: 100vh;
+            box-shadow: var(--box-shadow);
+            border-right: 1px solid var(--input-border);
+            overflow: hidden;
+
+        }
+
+        .layout:has(#toggle:checked) #sidebar {
+            grid-template-columns: 250px 1fr;
+        }
+
+        .avater {
+            width: 25px;
+            height: 25px;
+            background-color: var(--primary-hover);
+            color: white;
+            border: 1px solid var(--input-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14x;
+            font-weight: 400;
+            text-transform: lowercase;
+
+        }
     </style>
 </head>
+
 <body>
-    
-    <input type="checkbox" id="toggle">
-    <label for="toggle">☰ </label>
-   <div class="container"> 
-    <div  id="header" style="background-color: green;">
-        <ul>
-    {% if user %}
-        <div class="avater"><li>{{ user.name.split()[0][0] }}</li></div>
-        <li>about</li>
-        <li>contact</li>
-        <li><a href="/logout">logout</a></li>
-    {% else %}
-        <li><a href="{{ url_for('routes.login') }}">login</a></li>
-        <li>about</li>
-        <li>contact</li>
-    {% endif %}
-</ul>
+    <div class="layout">
+        <input type="checkbox" id="toggle">
+        <div class="container">
+            <div id="header">
+
+                <label for="toggle">☰ </label>
+                <ul>
+                    {% if user %}
+                    <div class="avater">
+                        <li>{{ user.name.split()[0][0] }}</li>
+                    </div>
+                    <li>about</li>
+                    <li>contact</li>
+                    <li><a href="/logout">logout</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('routes.login') }}">login</a></li>
+                    <li>about</li>
+                    <li>contact</li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div id="sidebar">
+                <select name="" id="">
+                    <option value="">option 1</option>
+                    <option value="">option 2</option>
+                    <option value="">option 3</option>
+                </select>
+            </div>
+            <div id="content">content</div>
+            <div id="footer">footer</div>
+        </div>
     </div>
-    <div  id="sidebar" style="background-color:blue;">sidebar</div>
-    <div  id="content"   style="background-color: red;">content</div>
-    <div  id="footer" style="background-color:whitesmoke;">footer</div></div>
 </body>
+
 </html>
